@@ -1,4 +1,4 @@
-﻿
+
 CREATE FUNCTION [dbo].[ufnGetCustomerInformation](@CustomerID int)
 RETURNS TABLE 
 AS 
@@ -8,10 +8,8 @@ RETURN (
         CustomerID, 
         FirstName, 
         LastName
-    FROM [SalesLT].[Customer] 
+    FROM [233728].[Customer] 
     WHERE [CustomerID] = @CustomerID
 );
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Table value function returning the customer ID, first name, and last name for a given customer.', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'FUNCTION', @level1name = N'ufnGetCustomerInformation';
-
