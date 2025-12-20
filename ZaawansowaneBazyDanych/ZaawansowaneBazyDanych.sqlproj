@@ -94,7 +94,6 @@
     <Build Include="SalesLT\Views\vGetAllCategories.sql" />
     <Build Include="dbo\Functions\ufnGetSalesOrderStatusText.sql" />
     <Build Include="dbo\Functions\ufnGetAllCategories.sql" />
-    <Build Include="dbo\Functions\ufnGetCustomerInformation.sql" />
     <Build Include="dbo\Stored Procedures\uspPrintError.sql" />
     <Build Include="dbo\Stored Procedures\uspLogError.sql" />
     <Build Include="dbo\User Defined Types\AccountNumber.sql" />
