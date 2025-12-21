@@ -78,6 +78,8 @@
     <Folder Include="bin" />
     <Folder Include="bin\Debug" />
     <Folder Include="dbo\XMLSchemaCollections\" />
+    <Folder Include="Student_728\Views\" />
+    <Folder Include="Student_728\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\ErrorLog.sql" />
@@ -116,6 +118,12 @@
     <Build Include="dbo\Tables\CustomerHistory.sql" />
     <Build Include="SalesLT\Tables\ProductAttribute.sql" />
     <Build Include="dbo\XMLSchemaCollections\ProductAttributeSchema.sql" />
+    <Build Include="dbo\Tables\TopProducts.sql" />
+    <Build Include="Student_728\Views\TheBestCustomers.sql" />
+    <Build Include="Student_728\Functions\ufn_ProductsJsonByCategory.sql" />
+    <Build Include="Student_728\Functions\ufn_IsPriceHigherThanCurrent.sql" />
+    <Build Include="Student_728\Functions\ufn_CalcAdjustedPrices.sql" />
+    <Build Include="Student_728\Functions\ufn_PriceCheckTVF.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Functions\ufnGetCustomerInformation" />
