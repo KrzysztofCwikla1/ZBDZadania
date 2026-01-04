@@ -80,6 +80,9 @@
     <Folder Include="dbo\XMLSchemaCollections\" />
     <Folder Include="Student_728\Views\" />
     <Folder Include="Student_728\Functions\" />
+    <Folder Include="233728\Functions\" />
+    <Folder Include="SalesLT\Stored Procedures\" />
+    <Folder Include="233728\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\ErrorLog.sql" />
@@ -124,6 +127,11 @@
     <Build Include="Student_728\Functions\ufn_IsPriceHigherThanCurrent.sql" />
     <Build Include="Student_728\Functions\ufn_CalcAdjustedPrices.sql" />
     <Build Include="Student_728\Functions\ufn_PriceCheckTVF.sql" />
+    <Build Include="233728\Functions\CheckIfUniqueCustomer.sql" />
+    <Build Include="SalesLT\Stored Procedures\GetCustomerHistory.sql" />
+    <Build Include="233728\Stored Procedures\CustomerData.sql" />
+    <Build Include="233728\Stored Procedures\ClientInserter.sql" />
+    <Build Include="dbo\User Defined Types\K8_surname.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Functions\ufnGetCustomerInformation" />
