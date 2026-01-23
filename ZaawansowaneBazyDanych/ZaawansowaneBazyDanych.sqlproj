@@ -123,7 +123,6 @@
     <Build Include="dbo\XMLSchemaCollections\ProductAttributeSchema.sql" />
     <Build Include="dbo\Tables\TopProducts.sql" />
     <Build Include="Student_728\Views\TheBestCustomers.sql" />
-    <Build Include="Student_728\Functions\ufn_ProductsJsonByCategory.sql" />
     <Build Include="Student_728\Functions\ufn_IsPriceHigherThanCurrent.sql" />
     <Build Include="Student_728\Functions\ufn_CalcAdjustedPrices.sql" />
     <Build Include="Student_728\Functions\ufn_PriceCheckTVF.sql" />
@@ -132,6 +131,8 @@
     <Build Include="233728\Stored Procedures\CustomerData.sql" />
     <Build Include="233728\Stored Procedures\ClientInserter.sql" />
     <Build Include="dbo\User Defined Types\K8_surname.sql" />
+    <Build Include="SalesLT\Tables\ProductPriceHistory.sql" />
+    <Build Include="233728\Tables\DeletedCustomersLog.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Functions\ufnGetCustomerInformation" />

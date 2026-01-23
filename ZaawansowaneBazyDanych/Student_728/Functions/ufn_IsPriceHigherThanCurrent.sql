@@ -25,4 +25,4 @@ begin
      else 0
  end;
 end;
---równa cena zwraca zero bo sprawdzamy czy jest większa, większe lub równe zwracałoby 1
+--r�wna cena zwraca zero bo sprawdzamy czy jest wi�ksza, wi�ksze lub r�wne zwraca�oby 1

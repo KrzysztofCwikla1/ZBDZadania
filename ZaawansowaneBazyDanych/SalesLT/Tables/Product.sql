@@ -29,6 +29,8 @@
 );
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Unique nonclustered constraint.', @level0type = N'SCHEMA', @level0name = N'SalesLT', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'CONSTRAINT', @level2name = N'AK_Product_Name';
 
@@ -144,3 +146,59 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'ROWGUIDCOL 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Date and time the record was last updated.', @level0type = N'SCHEMA', @level0name = N'SalesLT', @level1type = N'TABLE', @level1name = N'Product', @level2type = N'COLUMN', @level2name = N'ModifiedDate';
 
+
+GO
+-- =============================================
+-- Zadanie 4 
+-- =============================================
+create trigger SalesLT.trgNoDrasticPriceIncrease
+on SalesLT.Product
+after update
+as
+begin
+	set nocount on;
+	begin try
+	if exists(
+	select 1 from 
+	inserted i
+	join deleted d on i.ProductID = d.ProductID
+	where i.ListPrice > (d.ListPrice * 1.20)
+	)
+		throw 99999, 'Za duża podwyżka ceny', 1;
+	end try
+	begin catch
+		insert into dbo.ErrorLog (ErrorMessage, ErrorTime)
+		values (ERROR_MESSAGE(), GETDATE());
+	end catch
+end;
+GO
+-- =============================================
+-- Krzysztof
+-- Ćwikła
+-- 233728
+-- https://github.com/KrzysztofCwikla1/ZBDZadania
+-- =============================================
+-- =============================================
+-- Zadanie 1 
+-- =============================================
+--create table SalesLT.ProductPriceHistory(
+--EditID int identity (1,1) primary key,
+--ProductID int not null,
+--OldPrice decimal not null,
+--NewPrice decimal not null,
+--);
+--go
+create trigger [SalesLT].trg_Price_Change
+on SalesLT.Product
+after update
+as
+begin
+	set nocount on;
+	insert into SalesLT.ProductPriceHistory (ProductID,OldPrice,NewPrice)
+	select i.ProductID,
+		d.ListPrice as OldPrice,
+		i.ListPrice as NewPrice
+	from inserted i 
+	join deleted d on i.ProductID = d.ProductID
+	where isnull(d.ListPrice, -1) <> isnull(i.ListPrice, -1);
+end

@@ -4,7 +4,7 @@
     [Title]        NVARCHAR (8)                                NULL,
     [FirstName]    [dbo].[Name]                                NOT NULL,
     [MiddleName]   [dbo].[Name]                                NULL,
-    [LastName]     [dbo].[K8_surname]                          NOT NULL,
+    [LastName]     [dbo].[Name]                                NOT NULL,
     [Suffix]       NVARCHAR (10)                               NULL,
     [CompanyName]  NVARCHAR (128)                              NULL,
     [SalesPerson]  NVARCHAR (256)                              NULL,
@@ -19,8 +19,9 @@
     CONSTRAINT [PK_Customer_CustomerID] PRIMARY KEY CLUSTERED ([CustomerID] ASC),
     CONSTRAINT [AK_Customer_rowguid] UNIQUE NONCLUSTERED ([rowguid] ASC),
     PERIOD FOR SYSTEM_TIME ([SysStartTime], [SysEndTime])
-)
-WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE=[dbo].[CustomerHistory], DATA_CONSISTENCY_CHECK=ON));
+);
+
+
 
 
 
@@ -119,3 +120,32 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Default con
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'Primary key (clustered) constraint', @level0type = N'SCHEMA', @level0name = N'233728', @level1type = N'TABLE', @level1name = N'Customer', @level2type = N'CONSTRAINT', @level2name = N'PK_Customer_CustomerID';
 
+
+GO
+create trigger [233728].LogUserDataInstead
+
+on [233728].Customer
+instead of delete
+as begin
+	set nocount on;
+
+	if exists 
+	(select 1 from deleted d
+	join SalesLT.SalesOrderHeader soh
+	on d.CustomerID = soh.CustomerID)
+	begin
+		insert into [233728].DeletedCustomersLog (CustomerID, FirstName, MiddleName, LastName)
+		select
+		d.CustomerID,
+		d.FirstName,
+		d.MiddleName,
+		d.LastName
+		from deleted d
+		where exists (select 1 from SalesLT.SalesOrderHeader soh where soh.CustomerID = d.CustomerID);
+	end
+	else
+	begin
+		delete c from [233728].Customer c
+		inner join deleted d on c.CustomerID = d.CustomerID
+	end
+end
